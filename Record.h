@@ -17,8 +17,36 @@ class Record {
 
 		unsigned short int xx,		///	coordinate for the X axis
 					       yy;		///	coordinate for the Y axis
+		
+
+		class Keyword
+		{
+			Keyword* next;
+			Keyword* prev;
+			string data;
+
+			Keyword(prev,next,data)
+			{
+				this->next = next;
+				this->prev = prev;
+				this->data = data;
+			}
+			Keyword()
+			{
+				next = 0;
+				prev = 0;
+				data = "";
+			}
+		}
+		
+		Keyword* root;				///	Root node of keywords.
 
 	public:
+
+		Record();
+
+		~Record();
+
 		string title();
 		void title(const string& t);
 

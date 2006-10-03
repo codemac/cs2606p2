@@ -1,15 +1,9 @@
 #include "Record.h"
 
-		string ttitle,				///	record title
-			   ddatetime,			///	date in format YYMMDDHHmm
-			   ddescription;			/// record description
-
-		unsigned int llength,		///	length in minutes
-					 ccost,			///	cost in whole dollar amounts
-					 IID;			///	unique ID
-
-		unsigned short int xx,		///	coordinate for the X axis
-					       yy;		///	coordinate for the Y axis
+Record::Record() {
+}
+Record::~Record() {
+}
 
 string Record::title() {
 	return ttitle;
