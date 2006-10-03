@@ -37,7 +37,7 @@ class Record {
 				prev = 0;
 				data = "";
 			}
-		}
+		};
 		
 		Keyword* root;				///	Root node of keywords.
 
@@ -72,4 +72,5 @@ class Record {
 		void y(const unsigned short int& y);
 
 		unsigned short int* coords();
-}
+};
+#endif
