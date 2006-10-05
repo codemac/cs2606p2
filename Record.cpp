@@ -70,10 +70,48 @@ void Record::y(const unsigned short int& y) {
 }
 
 unsigned short int* Record::coords() {
-	int* a = new int[2];
+	unsigned short int* a = new unsigned short int[2];
 
 	a[0] = xx;
 	a[1] = yy;
 
 	return a;
 }
+
+string* Record::keywords(void) {
+	int count = 0;
+	Keyword* n = root;
+
+	while ( n != 0 ) {
+		n = n->next;
+		count++;
+	}
+	
+	n = root;
+
+	string* keys = new string[count];
+	
+	for ( int i = 0; i < count; i++) {
+		keys[i] = n->data;
+		n = n->next;
+	}
+
+	return keys;
+}
+
+void Record::keywords(string key) {
+	if ( root == 0 )
+		root = new Keyword(key, 0);
+	else {
+		///	find last node
+		Keyword* n = root;
+		while ( n->next != 0 )
+			n = n->next;
+
+		n->next = new Keyword(key, 0);
+	}
+}
+
+
+
+

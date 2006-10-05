@@ -21,22 +21,20 @@ class Record {
 
 		class Keyword
 		{
-			Keyword* next;
-			Keyword* prev;
-			string data;
+			public:
+				Keyword* next;
+				string data;
 
-			Keyword(prev,next,data)
-			{
-				this->next = next;
-				this->prev = prev;
-				this->data = data;
-			}
-			Keyword()
-			{
-				next = 0;
-				prev = 0;
-				data = "";
-			}
+				Keyword(string data,Keyword* next)
+				{
+					this->next = next;
+					this->data = data;
+				}
+				Keyword()
+				{
+					next = 0;
+					data = "";
+				}
 		};
 		
 		Keyword* root;				///	Root node of keywords.
@@ -72,5 +70,8 @@ class Record {
 		void y(const unsigned short int& y);
 
 		unsigned short int* coords();
+		
+		string* keywords();
+		void keywords(string keyword);
 };
 #endif
