@@ -47,7 +47,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 	if ( C::lt(*obj, *lDiscrim) )
 	{
 		LeafNode<T,C>* leaf = one->insert(obj);
-		if ( temp )				////	What is temp?
+		if ( leaf )
 		{			
 			if ( three )
 			{
@@ -69,7 +69,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 	else if ( C::lt(*obj, *rDiscrim) )
 	{
 		LeafNode<T,C>* leaf = two->insert(obj);
-		if ( temp )
+		if ( leaf )
 		{
 			if ( three )
 			{
@@ -88,7 +88,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 	else
 	{
 		LeafNode<T,C>* leaf = three->insert(obj);
-		if ( temp )
+		if ( leaf )
 		{
 			InternalNode<T,C>* temp = new InternalNode(rDiscrim, NULL, three, leaf, NULL);
 			three = NULL;
