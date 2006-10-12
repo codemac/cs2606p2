@@ -1,9 +1,16 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include <iostream>
+#include "Record.h"
 #include "KDTree.h"
 #include "BTree.h"
 #include "Parser.h"
+#include "CompDate.h"
+#include "CompKeyword.h"
+#include "CompCost.h"
+#include "CompID.h"
+
 
 using namespace std;
 
@@ -11,8 +18,13 @@ class System {
 	private:
 		Parser p;
 		KDTree coord;
-		BTree cost, date, keyword, id;
+		BTree<Record, CompCost> cost;
+		BTree<Record, CompDate> date;
+		BTree<Record, CompKeyword> keyword;
+		BTree<Record, CompID> id;
 	public:
-		void run();
+		System();
+		~System();
+		void run(const ostream& out);
 };
 #endif
