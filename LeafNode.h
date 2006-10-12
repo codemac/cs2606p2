@@ -10,42 +10,45 @@ using namespace std;
 template <typename T, typename C>
 class LeafNode : public NodeADT {
 	private:
-		T* rObject;
 		T* lObject;
+		T* rObject;
 		
 		LeafNode<T,C>* sibling;
+		virtual LeafNode<T,C>* split(T* obj);
 
 	public:
 		LeafNode();
-		LeafNode(T* robj, T* lobj, LeafNode<T,C>* sibling);
+		LeafNode(T* lobj, T* robj, LeafNode<T,C>* sibling);
 		~LeafNode();
 
-		virtual bool insert(T* obj); 
+		virtual LeafNode<T,C>* insert(T* obj); 
 		virtual void search(T* obj, const ostream& out);
 		virtual void remove(T* obj);
+		virtual bool isFull();
 		virtual void dump();
+		
 
 		friend class InternalNode;
 };
 
 template <typename T, typename C>
-bool LeafNode<T,C>::insert(T* obj) {
+LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 	if ( lObject == 0 ) {
 		lObject = obj;
-		return true;
+		return NULL;
 	}
 	else if ( rObject == 0 ) {
-		if ( C::lte(*lObject, *obj) ) {	//		lObject <= obj
+		if ( C::lt(*lObject, *obj) ) {	//		lObject <= obj
 			rObject = obj;
 		}
 		else {
 			rObject = lObject;
 			lObject = obj;
 		}
-		return true;
+		return NULL;
 	}
 	else {
-		return false;
+		return split(obj);
 	}
 }
 
@@ -58,4 +61,41 @@ void LeafNode<T,C>::dump() {
 	C::dump(lObject);
 	C::dump(rObject);
 }
+
+template <typename T, typename C>
+bool LeafNode<T,C>::isFull()
+{
+	if ( lObject == 0 && rObject == 0 ) return true;
+	return false;
+}
+
+template <typename T, typename C>
+LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
+{
+	if ( !isFull() ) return NULL;
+	
+	if ( C::lt(obj*, lObject*) )
+	{
+		LeafNode<T,C>* temp = new LeafNode<T,C>(lObject, rObject, NULL);
+		sibling = temp;
+		rObject = NULL;
+		lObject = obj;
+		return temp;
+	}
+	else if ( C::lt(rObject*, obj*) )
+	{
+		LeafNode<T,C>* temp = new LeafNode<T,C>(rObject, obj, NULL);
+		sibling = temp;
+		rObject = NULL;
+		return temp;
+	}
+	else
+	{
+		LeafNode<T,C>* temp = new LeafNode<T,C>(obj, rObject, NULL);
+		sibling = temp;
+		rObject = NULL;
+		return temp;
+	}		
+}
+
 #endif
