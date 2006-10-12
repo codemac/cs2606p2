@@ -57,10 +57,10 @@ LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 template <typename T, typename C>
 void LeafNode<T,C>::search(T* obj, const ostream& out) {
 	if ( C::equal(lObject,obj)) {
-		out << C::print(lObject) << endl;
+		out << C::dump(lObject) << endl;
 	}
 	if ( C::equal(rObject,obj)) {
-		out << C::print(rObject) << endl;
+		out << C::dump(rObject) << endl;
 		if (sibling != 0) {
 			sibling->search(obj,out);
 		}
@@ -83,10 +83,10 @@ void LeafNode<T,C>::search(T* obj, T* objj, const ostream& out) {
 		return;
 	
 	if ( C::lt(obj, lObject) )
-		out << C::print(lObject);
+		out << C::dump(lObject);
 	
 	if ( C::lt(rObject, objj) || C::equal(rObject, objj) )
-		out << C::print(rObject);
+		out << C::dump(rObject);
 	else
 		return;
 
