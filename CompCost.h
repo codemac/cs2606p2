@@ -7,5 +7,6 @@ class CompCost {
 	public:
 		bool lt(Record* lhs, Record* rhs);
 		bool equal(Record* lhs, Record* rhs);
+		void dump(Record* obj);
 };
 #endif
