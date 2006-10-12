@@ -1,9 +1,15 @@
 * MAKE SUBCLIPSE WORK CUZ I R DUM
 	* You rock
-* NODES
+* LEAF NODES
 	*	Insert
+	*	Search
 	*	Delete
-	*	Dumps
+	*	Dump
+* INTERNAL NODES
+	*	Insert	-	done?
+	*	Search	-	done?
+	*	Delete
+	*	Dump	-	done?
 * Write parser
 * Write command handling / system class
 * über amounts of testing

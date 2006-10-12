@@ -12,6 +12,6 @@ class NodeADT {
 		virtual void search(T* obj, const ostream& out) = 0;
 		virtual void remove(T* obj) = 0;
 		virtual bool isLeaf();
-		virtual void dump() = 0;
+		virtual void dump(int level, const ostream& out) = 0;
 };
 #endif

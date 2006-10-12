@@ -26,7 +26,7 @@ class InternalNode : public NodeADT {
 		virtual void search(T* low, T* high, const ostream& out);
 		virtual void remove(T* obj);
 		virtual bool isFull();
-		virtual void dump();
+		virtual void dump(int level, const ostream& out);
 };
 
 template <typename T, typename D, typename C>
@@ -56,8 +56,17 @@ bool InternalNode<T,D,C>::isLeaf()
 }
 
 template <typename T, typename D, typename C>
-void InternalNode<T,D,C>::dump() {
+void InternalNode<T,D,C>::dump(int level, const ostream& out) 
+{
+	for ( int i = 0; i < level; i++ )
+	{
+		out << "-";
+	}
+	out << "Internal Node: " << C::dump(lDiscrim*) << ", " << C::dump(rDiscrim*) << endl;
 	
+	one->dump(level+1, out);
+	two->dump(level+1, out);
+	three->dump(level+1, out);
 }
 
 template <typename T, typename D, typename C>
