@@ -10,7 +10,8 @@ using namespace std;
 class System {
 	private:
 		Parser p;
-		KDTree 
+		KDTree coord;
+		BTree cost, date, keyword, id;
 	public:
 		void run();
 };
