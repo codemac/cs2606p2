@@ -65,7 +65,66 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insert(T* obj)
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj) 
 {
-	
+	if ( C::lt(*obj, *lDiscrim) )
+	{
+		InternalNode<T,D,C> inter = one->insert(obj);
+		if ( inter )
+		{
+			if ( three )
+			{
+				InternalNode<T,C>* temp = new InternalNode(rDiscrim, NULL, two, three, NULL);
+				two = inter;
+				rDiscrim = NULL;
+				lDiscrim = two->lObject->getDiscrim();
+				three = NULL;
+				return temp;
+			}
+			else
+			{
+				three = two;
+				two = inter;
+				rDiscrim = lDiscrim;
+				lDiscrim = two->lObject->getDiscrim();
+				return NULL;	
+			}
+		}
+		else return NULL;
+	}
+	else if ( C::lt(*obj, *rDiscrim) )
+	{
+		InternalNode<T,D,C> inter = two->insert(obj);
+		if ( inter )
+		{
+			if ( three )
+			{
+				InternalNode<T,C>* temp = new InternalNode(rDiscrim, NULL, inter, three, NULL);
+				rDiscrim = NULL;
+				lDiscrim = two->lObject->getDiscrim();
+				three = NULL;
+				return temp;
+			}
+			else
+			{
+				three = inter;
+				rDiscrim = three->lObject->getDiscrim();
+				lDiscrim = two->lObject->getDiscrim();
+				return NULL;	
+			}
+		}
+		else return NULL;
+	}
+	else
+	{
+		InternalNode<T,D,C> inter = three->insert(obj);
+		if ( inter )
+		{
+			InternalNode<T,C>* temp = new InternalNode(inter->getDiscrim(), NULL, three, inter, NULL);
+			rDiscrim = NULL;
+			three = NULL;
+			return temp;
+		}
+		else return NULL;
+	}
 }
 
 template <typename T, typename D, typename C>
@@ -80,6 +139,8 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 			{
 				InternalNode<T,C>* temp = new InternalNode(rDiscrim, NULL, two, three, NULL);
 				two = leaf;
+				rDiscrim = NULL;
+				lDiscrim = two->lObject->getDiscrim();
 				three = NULL;
 				return temp;
 			}
@@ -87,8 +148,8 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 			{
 				three = two;
 				two = leaf;
+				rDiscrim = lDiscrim;
 				lDiscrim = two->lObject->getDiscrim();
-				rDiscrim = three->lObject->getDiscrim();
 			}
 		}
 		else return NULL;
