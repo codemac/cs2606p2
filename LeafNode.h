@@ -26,6 +26,7 @@ class LeafNode : public NodeADT {
 		virtual void search(T* obj, T* objj, const ostream& out);
 		virtual void remove(T* obj);
 		virtual bool isFull();
+		virtual bool isFull();
 		virtual void dump();
 		
 
@@ -98,6 +99,12 @@ template <typename T, typename C>
 void LeafNode<T,C>::dump() {
 	C::dump(lObject);
 	C::dump(rObject);
+}
+
+template <typename T, typename C>
+bool LeafNode<T,C>::isLeaf()
+{
+	return true;	
 }
 
 template <typename T, typename C>
