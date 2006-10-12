@@ -18,16 +18,36 @@ class InternalNode : public NodeADT {
 		virtual InternalNode<T,D,C>* insertToInternal(T* obj);
 	public:
 		InternalNode();
-		InternalNode(D* disc1, D* disc2, NodeADT* chil1, NodeADT* chil2, NodeADT* chil3);
+		InternalNode(D* lDisc, D* rDisc, NodeADT* chil1, NodeADT* chil2, NodeADT* chil3);
 		~InternalNode();
 
 		virtual InternalNode<T,D,C>* insert(T* obj);
 		virtual void search(T* obj, const ostream& out);
-		virtual void search(T* obj, T* objj, const ostream& out);
+		virtual void search(T* low, T* high, const ostream& out);
 		virtual void remove(T* obj);
 		virtual bool isFull();
 		virtual void dump();
 };
+
+template <typename T, typename D, typename C>
+InternalNode<T,D,C>::InternalNode()
+{
+	rDiscrim = NULL;
+	lDiscrim = NULL;
+	one = NULL;
+	two = NULL;
+	three = NULL;
+}
+
+template <typename T, typename D, typename C>
+InternalNode<T,D,C>::InternalNode(D* lDisc, D* rDisc, NodeADT* chil1, NodeADT* chil2, NodeADT* chil3)
+{
+	lDiscrim = lDisc;
+	rDiscrim = rDisc;
+	one = chil1;
+	two = chil2;
+	three = chil3;	
+}
 
 template <typename T, typename D, typename C>
 bool InternalNode<T,D,C>::isLeaf() 
@@ -41,17 +61,47 @@ void InternalNode<T,D,C>::dump() {
 }
 
 template <typename T, typename D, typename C>
-void InternalNode<T,D,C>::search(T* obj, const ostream& out) {
-	if ( one != 0 ) one->search(obj,out);
+void InternalNode<T,D,C>::search(T* obj, const ostream& out) 
+{
+	if ( C::lt(obj*, lDiscrim*) )
+	{
+		one->search(obj, out);
+	}
+	else if ( three )
+	{
+		if ( C::lt(obj*, rDiscrim*) )
+		{
+			two->search(obj, out);
+		}
+		else three->search(obj, out);
+	}
+	else two->search(obj, out);
+
+/*	if ( one != 0 ) one->search(obj,out);
 	if ( two != 0 ) two->search(obj,out);
-	if ( three != 0 ) three->search(obj,out);
+	if ( three != 0 ) three->search(obj,out);*/
 }
 
 template <typename T, typename D, typename C>
-void InternalNode<T,D,C>::search(T* obj, T* objj, const ostream& out) {
-	if ( one != 0 ) one->search(obj,objj,out);
+void InternalNode<T,D,C>::search(T* low, T* high, const ostream& out) 
+{
+	if ( C::lt(low*, lDiscrim*) )
+	{
+		one->search(low, high, out);
+	}
+	else if ( three )
+	{
+		if ( C::lt(low*, rDiscrim*) )
+		{
+			two->search(low, high, out);
+		}
+		else three->search(low, high, out);
+	}
+	else two->search(low, high, out);
+	
+	/*if ( one != 0 ) one->search(obj,objj,out);
 	if ( two != 0 ) two->search(obj,objj,out);
-	if ( three != 0 ) three->search(obj,objj,out);
+	if ( three != 0 ) three->search(obj,objj,out);*/
 }
 
 template <typename T, typename D, typename C>
