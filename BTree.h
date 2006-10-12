@@ -22,6 +22,7 @@ class BTree {
 
 		bool insert(T* obj);
 		void search(T* obj);
+		void search(T* obj, T* objj);
 		bool remove(T* obj);
 		void dump();
 };
@@ -47,6 +48,11 @@ bool BTree<T,C>::insert(T* obj) {
 template <typename T, typename C>
 void BTree<T,C>::search(T* obj) {
 	root.search(obj,out);
+}
+
+template <typename T, typename C>
+void BTree<T,C>::search(T* obj,T* objj) {
+	root.search(obj,objj,out);
 }
 
 template <typename T, typename C>

@@ -23,6 +23,7 @@ class InternalNode : public NodeADT {
 
 		virtual InternalNode<T,D,C>* insert(T* obj);
 		virtual void search(T* obj, const ostream& out);
+		virtual void search(T* obj, T* objj, const ostream& out);
 		virtual void remove(T* obj);
 		virtual void dump();
 };
@@ -31,6 +32,20 @@ class InternalNode : public NodeADT {
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::dump() {
 	
+}
+
+template <typename T, typename D, typename C>
+void InternalNode<T,D,C>::search(T* obj, const ostream& out) {
+	if ( one != 0 ) one->search(obj,out);
+	if ( two != 0 ) two->search(obj,out);
+	if ( three != 0 ) three->search(obj,out);
+}
+
+template <typename T, typename D, typename C>
+void InternalNode<T,D,C>::search(T* obj, T* objj, const ostream& out) {
+	if ( one != 0 ) one->search(obj,objj,out);
+	if ( two != 0 ) two->search(obj,objj,out);
+	if ( three != 0 ) three->search(obj,objj,out);
 }
 
 template <typename T, typename D, typename C>

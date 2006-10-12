@@ -23,6 +23,7 @@ class LeafNode : public NodeADT {
 
 		virtual LeafNode<T,C>* insert(T* obj); 
 		virtual void search(T* obj, const ostream& out);
+		virtual void search(T* obj, T* objj, const ostream& out);
 		virtual void remove(T* obj);
 		virtual bool isFull();
 		virtual void dump();
@@ -54,7 +55,44 @@ LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 
 template <typename T, typename C>
 void LeafNode<T,C>::search(T* obj, const ostream& out) {
+	if ( C::equal(lObject,obj)) {
+		out << C::print(lObject) << endl;
+	}
+	if ( C::equal(rObject,obj)) {
+		out << C::print(rObject) << endl;
+		if (sibling != 0) {
+			sibling->search(obj,out);
+		}
+	}
+	if ( C::lt(rObject,obj) ) {
+		if (sibling != 0) {
+			sibling->search(obj,out);
+		}
+	}
 }
+
+template <typename T, typename C>
+void LeafNode<T,C>::search(T* obj, T* objj, const ostream& out) {
+	if ( C::lt(rObject,obj) )				///		If biggest object is too small, move to sibling
+		if (sibling != 0) {
+			sibling->search(obj,objj,out);
+		}
+		return;
+	else if ( C::lt(objj,lObject) )			///		if smallest object is too big, stop calling search
+		return;
+	
+	if ( C::lt(obj, lObject) )
+		out << C::print(lObject);
+	
+	if ( C::lt(rObject, objj) || C::equal(rObject, objj) )
+		out << C::print(rObject);
+	else
+		return;
+
+	if (sibling != 0)
+		sibling->search(obj,objj,out);
+}
+
 
 template <typename T, typename C>
 void LeafNode<T,C>::dump() {
