@@ -25,9 +25,15 @@ class InternalNode : public NodeADT {
 		virtual void search(T* obj, const ostream& out);
 		virtual void search(T* obj, T* objj, const ostream& out);
 		virtual void remove(T* obj);
+		virtual bool isFull();
 		virtual void dump();
 };
 
+template <typename T, typename D, typename C>
+bool InternalNode<T,D,C>::isLeaf() 
+{
+	return false;
+}
 
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::dump() {
@@ -54,6 +60,12 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insert(T* obj)
 	if ( chil1->isLeaf() ) return insertToLeaf(obj);
 	
 	return insertToInternal(obj);
+}
+
+template <typename T, typename D, typename C>
+InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj) 
+{
+	
 }
 
 template <typename T, typename D, typename C>
