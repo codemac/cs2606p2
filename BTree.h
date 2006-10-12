@@ -19,7 +19,9 @@ class BTree {
 		BTree();
 		BTree(const ostream& out);
 		~BTree();
-
+		
+		void setOut(const ostream& out);
+		ostream getOut();
 		bool insert(T* obj);
 		void search(T* obj);
 		void search(T* obj, T* objj);
@@ -27,6 +29,15 @@ class BTree {
 		void dump();
 };
 
+template <typename T, typename C>
+void BTree<T,C>::setOut(const ostream& out) {
+	this->out = out;
+}
+
+template <typename T, typename C>
+void BTree<T,C>::getOut() {
+	return out;
+}
 
 template <typename T, typename C>
 void BTree<T,C>::BTree() {
