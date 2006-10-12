@@ -201,7 +201,13 @@ void makenull(BST<DataHolder> &bst, KDTree<DataHolder, DataHolder::DataComparato
  * area, given coordinates for a center point and a radius.  The trees can also be printed and made null.
  */
 int main ()
-{ 
+{
+	System s;
+	s.run();
+	return 0;
+
+
+
 	NodeStorage<DataHolder> *nodeStorage = new NodeStorage<DataHolder>(); //nodestorage pointer
 	KDTree<DataHolder, DataHolder::DataComparator> kdt(2, nodeStorage); //KDTree
 	BST<DataHolder> bst(nodeStorage);; //BST
