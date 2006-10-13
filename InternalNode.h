@@ -46,6 +46,14 @@ InternalNode<T,D,C>::InternalNode()
 	three = NULL;
 }
 
+/**
+ * Constructor to set up variables
+ * @param lDisc Left discriminate
+ * @param rDisc Right discriminate
+ * @param chil1 First child
+ * @param chil2 Second child
+ * @param chil3 Third child
+ */
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>::InternalNode(D* lDisc, D* rDisc, NodeADT* chil1, NodeADT* chil2, NodeADT* chil3)
 {
@@ -56,12 +64,21 @@ InternalNode<T,D,C>::InternalNode(D* lDisc, D* rDisc, NodeADT* chil1, NodeADT* c
 	three = chil3;	
 }
 
+/**
+ * Check if node is a leaf
+ * @return bool False because Internal nodes are not leaves
+ */
 template <typename T, typename D, typename C>
 bool InternalNode<T,D,C>::isLeaf() 
 {
 	return false;
 }
 
+/**
+ * dump the contents of everything below this internal node
+ * @param level Level currently at so that we don't print too many
+ * @param out out stream to print to
+ */
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::dump(int level, const ostream& out) 
 {
@@ -76,6 +93,10 @@ void InternalNode<T,D,C>::dump(int level, const ostream& out)
 	three->dump(level+1, out);
 }
 
+/**
+ * Search internal nodes for the object
+ * @param obj Object to search for
+ */
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::search(T* obj, const ostream& out) 
 {
@@ -98,6 +119,12 @@ void InternalNode<T,D,C>::search(T* obj, const ostream& out)
 	if ( three != 0 ) three->search(obj,out);*/
 }
 
+/**
+ * search for nodes in the following range
+ * @param low Low limit of range for the search
+ * @param high High limit of the range for the search
+ * @param out Out stream to print to
+ */
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::search(T* low, T* high, const ostream& out) 
 {
@@ -120,6 +147,10 @@ void InternalNode<T,D,C>::search(T* low, T* high, const ostream& out)
 	if ( three != 0 ) three->search(obj,objj,out);*/
 }
 
+/**
+ * insert object into btree
+ * @param obj Object to insert
+ */
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insert(T* obj) 
 {
@@ -128,6 +159,10 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insert(T* obj)
 	return insertToInternal(obj);
 }
 
+/**
+ * Insert value into the internal node level
+ * @param obj Object to insert
+ */
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj) 
 {
@@ -193,6 +228,10 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj)
 	}
 }
 
+/**
+ * Inseart object into leaf node level
+ * @param obj Object to insert
+ */
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj) 
 {
