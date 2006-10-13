@@ -7,6 +7,10 @@
 
 using namespace std;
 
+/**
+ * Leaf node class for use in a 2-3+ BTree.  Templated on both the object
+ * for it to hold, and the comparator to compare the object by.
+ */
 template <typename T, typename C>
 class LeafNode : public NodeADT {
 	private:
@@ -33,6 +37,9 @@ class LeafNode : public NodeADT {
 		friend class InternalNode;
 };
 
+/**
+ * Standard constructor
+ */
 template <typename T, typename C>
 LeafNode<T,C>::LeafNode<T,C>()
 {
@@ -41,6 +48,12 @@ LeafNode<T,C>::LeafNode<T,C>()
 	sibling = NULL;
 }
 
+/**
+ * Constructor that takes parameters to set up object
+ * @param lobj Left object
+ * @param robj Right object
+ * @param sib Sibling to link to
+ */
 template <typename T, typename C>
 LeafNode<T,C>::LeafNode<T,C>(T* lobj, T* robj, LeafNode<T,C>* sib)
 {
@@ -49,6 +62,11 @@ LeafNode<T,C>::LeafNode<T,C>(T* lobj, T* robj, LeafNode<T,C>* sib)
 	sibling = sib;
 }
 
+/**
+ * Insert a node into the leaf level
+ * @param obj Object to insert
+ * @return results of split or null
+ */
 template <typename T, typename C>
 LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 	if ( lObject == 0 ) {
@@ -70,6 +88,11 @@ LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 	}
 }
 
+/**
+ * Search for object in tree
+ * @param obj object to search for
+ * @param out Out stream to print to
+ */
 template <typename T, typename C>
 void LeafNode<T,C>::search(T* obj, const ostream& out) {
 	if ( C::equal(lObject,obj)) {
@@ -88,6 +111,12 @@ void LeafNode<T,C>::search(T* obj, const ostream& out) {
 	}
 }
 
+/**
+ * Search for a range of nodes
+ * @param obj Low end range
+ * @param objj High end range
+ * @param out Out stream to print to
+ */
 template <typename T, typename C>
 void LeafNode<T,C>::search(T* obj, T* objj, const ostream& out) {
 	if ( C::lt(rObject,obj) )				///		If biggest object is too small, move to sibling
@@ -111,18 +140,29 @@ void LeafNode<T,C>::search(T* obj, T* objj, const ostream& out) {
 }
 
 
+/**
+ * dump contents of node to out stream
+ */
 template <typename T, typename C>
 void LeafNode<T,C>::dump() {
 	C::dump(lObject);
 	C::dump(rObject);
 }
 
+/**
+ * Return if this node is a leaf or not
+ * @return bool True because this is a LeafNode
+ */
 template <typename T, typename C>
 bool LeafNode<T,C>::isLeaf()
 {
 	return true;	
 }
 
+/**
+ * Is tree full?
+ * @return bool True if tree is full, false if tree is not full
+ */
 template <typename T, typename C>
 bool LeafNode<T,C>::isFull()
 {
@@ -130,6 +170,11 @@ bool LeafNode<T,C>::isFull()
 	return false;
 }
 
+/**
+ * Split the node and create new nodes
+ * @param obj Object to split on
+ * @return LeafNode<T,C>* Results of split
+ */
 template <typename T, typename C>
 LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
 {
