@@ -16,6 +16,7 @@ class InternalNode : public NodeADT {
 
 		virtual InternalNode<T,D,C>* insertToLeaf(T* obj);
 		virtual InternalNode<T,D,C>* insertToInternal(T* obj);
+		
 	public:
 		InternalNode();
 		InternalNode(D* lDisc, D* rDisc, NodeADT* chil1, NodeADT* chil2, NodeADT* chil3);
@@ -72,13 +73,13 @@ void InternalNode<T,D,C>::dump(int level, const ostream& out)
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::search(T* obj, const ostream& out) 
 {
-	if ( C::lt(obj*, lDiscrim*) )
+	if ( C::lt(obj, *lDiscrim) )
 	{
 		one->search(obj, out);
 	}
 	else if ( three )
 	{
-		if ( C::lt(obj*, rDiscrim*) )
+		if ( C::lt(obj, *rDiscrim) )
 		{
 			two->search(obj, out);
 		}
@@ -94,13 +95,13 @@ void InternalNode<T,D,C>::search(T* obj, const ostream& out)
 template <typename T, typename D, typename C>
 void InternalNode<T,D,C>::search(T* low, T* high, const ostream& out) 
 {
-	if ( C::lt(low*, lDiscrim*) )
+	if ( C::lt(low, *lDiscrim) )
 	{
 		one->search(low, high, out);
 	}
 	else if ( three )
 	{
-		if ( C::lt(low*, rDiscrim*) )
+		if ( C::lt(low, *rDiscrim) )
 		{
 			two->search(low, high, out);
 		}
@@ -124,7 +125,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insert(T* obj)
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj) 
 {
-	if ( C::lt(*obj, *lDiscrim) )
+	if ( C::lt(obj, *lDiscrim) )
 	{
 		InternalNode<T,D,C> inter = one->insert(obj);
 		if ( inter )
@@ -149,7 +150,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj)
 		}
 		else return NULL;
 	}
-	else if ( C::lt(*obj, *rDiscrim) )
+	else if ( C::lt(obj, *rDiscrim) )
 	{
 		InternalNode<T,D,C> inter = two->insert(obj);
 		if ( inter )
@@ -189,7 +190,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToInternal(T* obj)
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj) 
 {
-	if ( C::lt(*obj, *lDiscrim) )
+	if ( C::lt(obj, *lDiscrim) )
 	{
 		LeafNode<T,C>* leaf = one->insert(obj);
 		if ( leaf )
@@ -213,7 +214,7 @@ InternalNode<T,D,C>* InternalNode<T,D,C>::insertToLeaf(T* obj)
 		}
 		else return NULL;
 	}
-	else if ( C::lt(*obj, *rDiscrim) )
+	else if ( C::lt(obj, *rDiscrim) )
 	{
 		LeafNode<T,C>* leaf = two->insert(obj);
 		if ( leaf )
