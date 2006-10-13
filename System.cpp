@@ -17,7 +17,6 @@ void System::run(const ostream& out) {
         if ( command == "insert" )
         {
             
-			Record* r = new Record();
 			int id;
 			cin >> id;
 
@@ -152,4 +151,3 @@ void System::run(const ostream& out) {
         else cout << "Unrecognized command.";
     }
 }
-
