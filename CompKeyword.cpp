@@ -1,9 +1,21 @@
 #include "CompKeyword.h"
 
+/**
+ * Logically a < operation on the records' keyword variables
+ * @param lhs the left hand side of the equation
+ * @param rhs the right hand side of the equation
+ * @return true if lhs keyword < rhs keyword
+ */
 bool CompKeyword::lt(Record* lhs, Record* rhs) {
-	return lhs->keyword() < rhs->keyword();
+	return *lhs->keyword() < *rhs->keyword();
 }
 
+/**
+ * Logically a < operation on the record's keyword variable and a string
+ * @param lhs the left hand side of the equation
+ * @param rhs the right hand side of the equation
+ * @return true if lhs keyword < rhs
+ */
 bool CompKeyword::lt(Record* lhs, string rhs) 
 {
 	string* word = lhs->keyword();
@@ -18,6 +30,23 @@ bool CompKeyword::lt(Record* lhs, string rhs)
 	return false;
 }
 
+
+/**
+ * Returns the discriminate of the sent in record based on this comparator
+ * @param obj the record to get the discriminate from
+ * @return the keyword of the record
+ */
+string* CompKeyword::getDiscrim(Record* obj)
+{
+	return obj->keyword();	
+}
+
+/**
+ * Logically a == operation on the records' keyword variables
+ * @param lhs the left hand side of the equation
+ * @param rhs the right hand side of the equation
+ * @return true if lhs keyword == rhs keyword
+ */
 bool CompKeyword::equal(Record* lhs, Record* rhs) 
 {
 	string* rWord = rhs->keyword();
@@ -36,6 +65,10 @@ bool CompKeyword::equal(Record* lhs, Record* rhs)
 	
 }
 
+/**
+ * Prints out the ID and keyword of the parameter
+ * @param obj the record to print out
+ */
 void CompCost::dump(Record* obj) {
-	cout << "Record " << obj->ID() << ": " << obj->keyword() << endl;
+	cout << "Record " << obj->ID() << ": " << *obj->keyword() << endl;
 }
