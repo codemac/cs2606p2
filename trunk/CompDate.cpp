@@ -10,7 +10,7 @@ bool CompDate::lt(Record* lhs, string rhs) {
 
 string* CompDate::getDiscrim(Record* obj)
 {
-	return new string(lhs->date);
+	return new string(obj->date);
 }
 
 bool CompDate::equal(Record* lhs, Record* rhs) {
