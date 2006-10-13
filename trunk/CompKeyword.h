@@ -6,7 +6,8 @@
 class CompKeyword {
 	public:
 		bool lt(Record* lhs, Record* rhs);
-//		bool lt(Record* lhs, string rhs);
+		bool lt(Record* lhs, string rhs);
+		string* getDiscrim(Record* obj);
 		bool equal(Record* lhs, Record* rhs);
 		void dump(Record* obj);
 };
