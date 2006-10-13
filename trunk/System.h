@@ -2,6 +2,7 @@
 #define SYSTEM_H
 
 #include <iostream>
+#include <sstream>
 #include "Record.h"
 #include "KDTree.h"
 #include "BTree.h"
