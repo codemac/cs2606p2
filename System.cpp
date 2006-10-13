@@ -50,6 +50,18 @@ void System::run(const ostream& out) {
 				r->keywords(title);
 			}
 			//	Description insert goes here.
+			string desc = "";
+			while (cin.peek != '\n')
+			{
+				cin.getline(title,100);
+				istringstream str(title);
+				while ( !str.eof() )
+				{
+					str >> title;
+					desc = desc + title;
+				}
+			}
+			r->description(desc);
         }
         else if ( command == "delete" )
         {
