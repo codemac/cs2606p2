@@ -112,6 +112,20 @@ void Record::keywords(string key) {
 	}
 }
 
+int Record::numKeywords()
+{
+	int count = 0;
+	Keyword* n = root;
+
+	while ( n != 0 ) 
+	{
+		n = n->next;
+		count++;
+	}
+	
+	return count;
+}
+
 
 
 
