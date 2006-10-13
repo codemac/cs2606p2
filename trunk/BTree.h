@@ -53,17 +53,22 @@ void BTree<T,C>::BTree(const ostream& out) {
 
 template <typename T, typename C>
 bool BTree<T,C>::insert(T* obj) {
-	root.insert(obj);
+	NodeADT* sib = root->insert(obj);
+	if ( temp )
+	{
+		NodeADT* temp = new InternalNode(sib->lDiscrim, NULL, root, sib, NULL)
+		root = temp;
+	}
 }
 
 template <typename T, typename C>
 void BTree<T,C>::search(T* obj) {
-	root.search(obj,out);
+	root->search(obj,out);
 }
 
 template <typename T, typename C>
 void BTree<T,C>::search(T* obj,T* objj) {
-	root.search(obj,objj,out);
+	root->search(obj,objj,out);
 }
 
 template <typename T, typename C>
@@ -74,7 +79,7 @@ bool BTree<T,C>::remove(T* obj) {
 
 template <typename T, typename C>
 void BTree<T,C>::dump() {
-	root.dump();
+	root->dump();
 }
 
 

@@ -19,7 +19,20 @@ bool CompKeyword::lt(Record* lhs, string rhs)
 	}
 }
 
-bool CompKeyword::equal(Record* lhs, Record* rhs) {
+bool CompKeyword::equal(Record* lhs, Record* rhs) 
+{
+	int numLhs = lhs->numKeywords();
+	int numRhs = lhs->numKeywords();
+	
+	if ( numRhs != numLhs ) return false;
+	
+	string* lWords = lhs->keywords();
+	string* rWords = rhs->keywords();
+	
+	for ( int i = 0; i < numLhs; i++ )
+	{
+		
+	
 	return lhs->keyword() == rhs->keyword();
 }
 
