@@ -20,34 +20,29 @@ void System::run(const ostream& out) {
 			Record* r = new Record();
 			int id;
 			cin >> id;
-			r->id(id);
 
-			string title;
-			cin.getline(title, 100);
-			r->title(title);
-
+			string title,ttitle;
+			cin.getline(ttitle, 100);
+			
 			cin.getline(title, 100);
 			istringstream stream(title);
 			int date;
 			stream >> date;
-			r->date(date);
 
 			int length;
 			stream >> length;
-			r->length(length);
 
 			int x,y;
 			stream >> x >> y;
-			r->x(x);	r->y(y);
 
 			int cost;
 			stream >> cost;
-			r->cost(cost);
-
+			
+			string keywords = "";
 			while (cin.peek() != '\n')
 			{
 				cin >> title;
-				r->keywords(title);
+				keywords = keywords + title;
 			}
 			//	Description insert goes here.
 			string desc = "";
@@ -61,7 +56,35 @@ void System::run(const ostream& out) {
 					desc = desc + title;
 				}
 			}
-			r->description(desc);
+
+			istringstream sttr(keywords);
+			int count = 0;
+			while ( !sttr.eof() )
+			{
+				count++;
+
+				sttr >> title;
+				Record* o = new Record;
+				o->title(ttitle);
+				o->date(date);
+				o->length(length);
+				o->keyword(title);
+				o->x(x); o->y(y);
+				o->description(desc);
+				o->cost(cost);
+				o->ID(ID);
+				
+				if ( count == 1 )
+				{
+					cost.insert(o);
+					id.insert(o);
+					location.insert(o);
+					date.insert(o);
+				}
+				
+				keyword.insert(o);
+				
+			}
         }
         else if ( command == "delete" )
         {
