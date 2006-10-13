@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/**
+ * Internal Node class
+ * Used as internal nodes in a BTree following the NodeADT interface
+ */
 template <typename T, typename D, typename C>
 class InternalNode : public NodeADT {
 	private:
@@ -29,7 +33,9 @@ class InternalNode : public NodeADT {
 		virtual bool isFull();
 		virtual void dump(int level, const ostream& out);
 };
-
+/**
+ * default constructor
+ */
 template <typename T, typename D, typename C>
 InternalNode<T,D,C>::InternalNode()
 {
