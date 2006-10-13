@@ -4,6 +4,10 @@ bool CompKeyword::lt(Record* lhs, Record* rhs) {
 	return lhs->keyword() < rhs->keyword();
 }
 
+/*bool CompKeyword::lt(Record* lhs, string rhs) {
+	
+}*/
+
 bool CompKeyword::equal(Record* lhs, Record* rhs) {
 	return lhs->keyword() == rhs->keyword();
 }

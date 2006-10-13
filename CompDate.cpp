@@ -4,6 +4,10 @@ bool CompDate::lt(Record* lhs, Record* rhs) {
 	return lhs->date() < rhs->date();
 }
 
+bool CompDate::lt(Record* lhs, string rhs) {
+	return lhs->date() < rhs;
+}
+
 bool CompDate::equal(Record* lhs, Record* rhs) {
 	return lhs->date() == lhs->date();
 }
