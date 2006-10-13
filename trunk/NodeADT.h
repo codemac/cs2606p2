@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/**
+ * Template class NodeADT for Btree nodes
+ */
 template <typename T>
 class NodeADT {
 	public:
