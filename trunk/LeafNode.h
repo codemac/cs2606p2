@@ -18,7 +18,7 @@ class LeafNode : public NodeADT {
 
 	public:
 		LeafNode();
-		LeafNode(T* lobj, T* robj, LeafNode<T,C>* sibling);
+		LeafNode(T* lobj, T* robj, LeafNode<T,C>* sib);
 		~LeafNode();
 
 		virtual LeafNode<T,C>* insert(T* obj); 
@@ -32,6 +32,22 @@ class LeafNode : public NodeADT {
 
 		friend class InternalNode;
 };
+
+template <typename T, typename C>
+LeafNode<T,C>::LeafNode<T,C>()
+{
+	lObject = NULL;
+	rObject = NULL;
+	sibling = NULL;
+}
+
+template <typename T, typename C>
+LeafNode<T,C>::LeafNode<T,C>(T* lobj, T* robj, LeafNode<T,C>* sib)
+{
+	lObject = lobj;
+	rObject = robj;
+	sibling = sib;
+}
 
 template <typename T, typename C>
 LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
@@ -121,7 +137,7 @@ LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
 	
 	if ( C::lt(obj*, lObject*) )
 	{
-		LeafNode<T,C>* temp = new LeafNode<T,C>(lObject, rObject, NULL);
+		LeafNode<T,C>* temp = new LeafNode<T,C>(lObject, rObject, sibling);
 		sibling = temp;
 		rObject = NULL;
 		lObject = obj;
@@ -129,14 +145,16 @@ LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
 	}
 	else if ( C::lt(rObject*, obj*) )
 	{
-		LeafNode<T,C>* temp = new LeafNode<T,C>(rObject, obj, NULL);
+		LeafNode<T,C>* temp = new LeafNode<T,C>(rObject, obj, sibling);
+		temp->sibling = sibling;
 		sibling = temp;
 		rObject = NULL;
 		return temp;
 	}
 	else
 	{
-		LeafNode<T,C>* temp = new LeafNode<T,C>(obj, rObject, NULL);
+		LeafNode<T,C>* temp = new LeafNode<T,C>(obj, rObject, sibling);
+		temp->sibling = sibling;
 		sibling = temp;
 		rObject = NULL;
 		return temp;
