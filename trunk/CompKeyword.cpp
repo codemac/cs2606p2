@@ -6,34 +6,34 @@ bool CompKeyword::lt(Record* lhs, Record* rhs) {
 
 bool CompKeyword::lt(Record* lhs, string rhs) 
 {
-	string* words = lhs->keywords();
-	int numWords = lhs->numKeywords();
-	
-	for ( int i = 0; i < numWords; i++ )
+	string* word = lhs->keyword();
+
+	if ( rhs == *word )
 	{
-		if ( rhs == words[i] )
-		{
-			delete[] words;
-			return true;
-		}
+		delete word;
+		return true;
 	}
+	
+	delete word;
+	return false;
 }
 
 bool CompKeyword::equal(Record* lhs, Record* rhs) 
 {
-	int numLhs = lhs->numKeywords();
-	int numRhs = lhs->numKeywords();
+	string* rWord = rhs->keyword();
+	string* lWord = lhs->keyword();
 	
-	if ( numRhs != numLhs ) return false;
-	
-	string* lWords = lhs->keywords();
-	string* rWords = rhs->keywords();
-	
-	for ( int i = 0; i < numLhs; i++ )
+	if ( *rWord == *lWord )
 	{
-		
+		delete rWord;
+		delete lWord;
+		return true;
+	}
+
+	delete rWord;
+	delete lWord;
+	return false;
 	
-	return lhs->keyword() == rhs->keyword();
 }
 
 void CompCost::dump(Record* obj) {

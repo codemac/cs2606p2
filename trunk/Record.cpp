@@ -78,8 +78,8 @@ unsigned short int* Record::coords() {
 	return a;
 }
 
-string* Record::keywords(void) {
-	int count = 0;
+string* Record::keyword(void) {
+	/*int count = 0;
 	Keyword* n = root;
 
 	while ( n != 0 ) {
@@ -94,12 +94,12 @@ string* Record::keywords(void) {
 	for ( int i = 0; i < count; i++) {
 		keys[i] = n->data;
 		n = n->next;
-	}
+	}*/
 
-	return keys;
+	return new string(keyword);
 }
 
-void Record::keywords(string key) {
+/*void Record::keywords(string key) {
 	if ( root == 0 )
 		root = new Keyword(key, 0);
 	else {
@@ -110,9 +110,9 @@ void Record::keywords(string key) {
 
 		n->next = new Keyword(key, 0);
 	}
-}
+}*/
 
-int Record::numKeywords()
+/*int Record::numKeywords()
 {
 	int count = 0;
 	Keyword* n = root;
@@ -124,7 +124,7 @@ int Record::numKeywords()
 	}
 	
 	return count;
-}
+}*/
 
 
 
