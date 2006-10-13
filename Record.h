@@ -9,7 +9,8 @@ class Record {
 	private:
 		string ttitle,				///	record title
 			   ddatetime,			///	date in format YYMMDDHHmm
-			   ddescription;			/// record description
+			   ddescription,		/// record description
+			   keyword;				/// keyword
 
 		unsigned int llength,		///	length in minutes
 					 ccost,			///	cost in whole dollar amounts
@@ -19,7 +20,7 @@ class Record {
 					       yy;		///	coordinate for the Y axis
 		
 
-		class Keyword
+		/*class Keyword
 		{
 			public:
 				Keyword* next;
@@ -35,10 +36,10 @@ class Record {
 					next = 0;
 					data = "";
 				}
-		};
+		}
 		
 		Keyword* root;				///	Root node of keywords.
-
+		*/
 	public:
 
 		Record();
@@ -71,8 +72,8 @@ class Record {
 
 		unsigned short int* coords();
 		
-		string* keywords();
-		void keywords(string keyword);
-		int numKeywords();
+		string* keyword();
+		//void keywords(string keyword);
+		//int numKeywords();
 };
 #endif
