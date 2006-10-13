@@ -86,7 +86,7 @@ void InternalNode<T,D,C>::dump(int level, const ostream& out)
 	{
 		out << "-";
 	}
-	out << "Internal Node: " << C::dump(lDiscrim*) << ", " << C::dump(rDiscrim*) << endl;
+	out << "Internal Node: " << *lDiscrim << ", " << *rDiscrim << endl;
 	
 	one->dump(level+1, out);
 	two->dump(level+1, out);
