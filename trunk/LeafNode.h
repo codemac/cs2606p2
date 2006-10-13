@@ -74,7 +74,7 @@ LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 		return NULL;
 	}
 	else if ( rObject == 0 ) {
-		if ( C::lt(*lObject, *obj) ) {	//		lObject < obj
+		if ( C::lt(lObject, obj) ) {	//		lObject < obj
 			rObject = obj;
 		}
 		else {
@@ -180,7 +180,7 @@ LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
 {
 	if ( !isFull() ) return NULL;
 	
-	if ( C::lt(obj*, lObject*) )
+	if ( C::lt(obj, lObject) )
 	{
 		LeafNode<T,C>* temp = new LeafNode<T,C>(lObject, rObject, sibling);
 		sibling = temp;
@@ -188,7 +188,7 @@ LeafNode<T,C>* LeafNode<T,C>::split(T* obj)
 		lObject = obj;
 		return temp;
 	}
-	else if ( C::lt(rObject*, obj*) )
+	else if ( C::lt(rObject, obj) )
 	{
 		LeafNode<T,C>* temp = new LeafNode<T,C>(rObject, obj, sibling);
 		temp->sibling = sibling;
