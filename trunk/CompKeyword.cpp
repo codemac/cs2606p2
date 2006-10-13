@@ -4,9 +4,20 @@ bool CompKeyword::lt(Record* lhs, Record* rhs) {
 	return lhs->keyword() < rhs->keyword();
 }
 
-/*bool CompKeyword::lt(Record* lhs, string rhs) {
+bool CompKeyword::lt(Record* lhs, string rhs) 
+{
+	string* words = lhs->keywords();
+	int numWords = lhs->numKeywords();
 	
-}*/
+	for ( int i = 0; i < numWords; i++ )
+	{
+		if ( rhs == words[i] )
+		{
+			delete[] words;
+			return true;
+		}
+	}
+}
 
 bool CompKeyword::equal(Record* lhs, Record* rhs) {
 	return lhs->keyword() == rhs->keyword();

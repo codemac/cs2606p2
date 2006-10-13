@@ -73,5 +73,6 @@ class Record {
 		
 		string* keywords();
 		void keywords(string keyword);
+		int numKeywords();
 };
 #endif
