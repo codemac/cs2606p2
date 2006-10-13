@@ -10,7 +10,7 @@ class Record {
 		string ttitle,				///	record title
 			   ddatetime,			///	date in format YYMMDDHHmm
 			   ddescription,		/// record description
-			   keyword;				/// keyword
+			   keywordd;				/// keyword
 
 		unsigned int llength,		///	length in minutes
 					 ccost,			///	cost in whole dollar amounts
@@ -73,7 +73,7 @@ class Record {
 		unsigned short int* coords();
 		
 		string* keyword();
-		//void keywords(string keyword);
+		void keyword(string key);
 		//int numKeywords();
 };
 #endif

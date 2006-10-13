@@ -1,5 +1,7 @@
 #include "Record.h"
-
+/**
+ * This is all getters and setters, it's self explanitory
+ */
 Record::Record() {
 }
 Record::~Record() {
@@ -99,7 +101,9 @@ string* Record::keyword(void) {
 	return new string(keyword);
 }
 
-/*void Record::keywords(string key) {
+void Record::keyword(string key) {
+	keywordd = key;
+	/*
 	if ( root == 0 )
 		root = new Keyword(key, 0);
 	else {
@@ -109,8 +113,8 @@ string* Record::keyword(void) {
 			n = n->next;
 
 		n->next = new Keyword(key, 0);
-	}
-}*/
+	}*/
+}
 
 /*int Record::numKeywords()
 {
