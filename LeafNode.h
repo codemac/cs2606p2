@@ -74,7 +74,7 @@ LeafNode<T,C>* LeafNode<T,C>::insert(T* obj) {
 		return NULL;
 	}
 	else if ( rObject == 0 ) {
-		if ( C::lt(*lObject, *obj) || C::equal(*lObject,*obj)) {	//		lObject <= obj
+		if ( C::lt(*lObject, *obj) ) {	//		lObject < obj
 			rObject = obj;
 		}
 		else {
