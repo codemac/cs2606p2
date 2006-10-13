@@ -6,40 +6,61 @@ void System::run(const ostream& out) {
 	cost.setOut(out);
 	id.setOut(out);
 	date.setOut(out);
+	//	KDTree location
 
 	bool exit = false;
     string command = "";
     while ( !cin.eof() && !exit)
     {   
-        getline(cin, command);
-            cout << command << endl;
-        istringstream stream (command);
-        stream >> command;        
+        cin >> command;
+        cout << command << endl;        
         if ( command == "insert" )
         {
-            insert(bst, kdt, dataStorage, stream);
+            
+			Record* r = new Record();
+
         }
         else if ( command == "delete" )
         {
-            remove(bst, kdt, dataStorage, stream);
-        }
-        else if ( command == "info" )
-        {
-            info(bst, kdt, dataStorage, stream);
+			//	NOT IMPLEMENTED
+            //remove(bst, kdt, dataStorage, stream);
         }
         else if ( command == "search" )
         {
-            search(kdt, stream);
+			cin >> command;
+			if ( command == "date" )
+			{
+				int d1,d2;
+				Record* o1 = new Record();
+				Record* o2 = new Record();
+				cin >> d1 >> d2;
+				o1->date(d1);
+				o2->date(d2);
+				date.search(o1,o2,cout);
+			}
+			else if ( command == "keyword" )
+			{
+				
+			}
+			else if ( command == "location" )
+			{
+				unsigned short int x, y;
+				cin >> x >> y;
+				Record *o1 = new Record();
+				o1->x(x);
+				o1->y(y);
+				kdtree.insert(o1);
+			}
+			else if ( command == "cost" )
+			{
+
+			}
         }
         else if ( command == "dump" )
         {
             bst.display(cout);
             kdt.display(cout);
         }
-        else if ( command == "makenull" )
-        {
-            makenull(bst, kdt, dataStorage);
-        }   
         else if ( command == "exit" || command == "quit" )
         {
         	exit = true;
