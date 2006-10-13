@@ -52,11 +52,16 @@ void BTree<T,C>::BTree(const ostream& out) {
 }
 
 template <typename T, typename C>
-bool BTree<T,C>::insert(T* obj) {
+bool BTree<T,C>::insert(T* obj) 
+{
 	NodeADT* sib = root->insert(obj);
 	if ( temp )
 	{
-		NodeADT* temp = new InternalNode(sib->lDiscrim, NULL, root, sib, NULL)
+		if ( root->isLeaf() )
+		{
+			NodeADT* temp = new InternalNode(C::getDiscrim(sib->lObject), NULL, root, sib, NULL);
+		}
+		else NodeADT* temp = new InternalNode(sib->lDiscrim, NULL, root, sib, NULL);
 		root = temp;
 	}
 }
